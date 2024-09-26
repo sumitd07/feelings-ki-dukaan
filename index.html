@@ -194,7 +194,7 @@ iframe {
 </head>
 <body>
 
-  <h1>Feelings Ki Dukaan</h1>
+<h1 class="hidden">Feelings Ki Dukaan</h1>
 
   <!-- Welcome Screen -->
   <div id="welcomeMessage" class="welcome-screen">
@@ -331,18 +331,23 @@ iframe {
 document.addEventListener('DOMContentLoaded', function() {
     const welcomeMessage = document.getElementById('welcomeMessage');
     const mainContent = document.querySelector('.container');
+    const header = document.querySelector('h1'); // Select the header
+    const footer = document.querySelector('footer'); // Select the footer
 
-    // Show welcome message for 3 seconds
+    // Show the welcome message for 3 seconds, then fade out
     setTimeout(function() {
-        // Fade out the welcome message
-        welcomeMessage.classList.add('fade-out');
+        welcomeMessage.classList.add('fade-out'); // Add fade-out class
 
-        // After the fade-out transition, display the main content
+        // After the fade-out transition completes (1 second), hide the welcome message completely
         setTimeout(function() {
             welcomeMessage.classList.add('hidden'); // Hide the welcome message completely
-            mainContent.classList.remove('hidden'); // Show the main content
-        }, 1000); // 1 second to match the fade-out animation
-    }, 3000); // Display welcome message for 3 seconds before starting the transition
+
+            // Show the main content, header, and footer
+            mainContent.classList.remove('hidden');
+            header.classList.remove('hidden');
+            footer.classList.remove('hidden');
+        }, 1000); // 1 second for fade-out transition
+    }, 5000); // Display welcome message for 5 seconds
 });
     // Call this function to fetch all songs across multiple tables
     fetchAllSongs();
@@ -350,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </script>
 
 <!-- Add this code just before the closing </body> tag in your HTML -->
-<footer>
+<footer class="hidden">
   Original concept by Shibzi💃 <br>
   Made with ❤️ for Shibzi by Mitsu
 </footer>
