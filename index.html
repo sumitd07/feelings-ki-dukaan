@@ -198,17 +198,18 @@ gsap.from("#videoFrame", {
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  opacity: 0; /* Initially hidden */
-  visibility: hidden; /* Initially hidden */
-  transition: opacity 1s ease, visibility 0s linear 1s; /* Fade out after delay */
-}
-
-.welcome-screen.show {
   opacity: 1;
   visibility: visible;
-  transition: opacity 1s ease; /* Fade in */
+  transition: opacity 1s ease, visibility 0s linear 1s;
 }
 
+.welcome-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 0s linear 1s; /* Ensures smooth transition */
+}
+
+/* Initially hide main content */
 .hidden {
   display: none;
 }
@@ -224,24 +225,15 @@ gsap.from("#videoFrame", {
     <p>Your personal mood-based music curator. Let’s find the perfect song to match your vibe.</p>
   </div>
 
+  <!-- Main Content - Initially Hidden -->
   <div class="container hidden">
     <label for="genre">How are you feeling today?</label>
-
-    <!-- Chips container to hold the genre chips -->
-    <div class="chips-container" id="chipsContainer">
-      <!-- Chips (genre buttons) will be generated here dynamically -->
-    </div>
-
+    <div class="chips-container" id="chipsContainer"></div>
     <button id="surpriseMe" style="display: none;">Surprise Me</button>
-
     <div class="result" id="result"></div>
-    
-    <!-- Responsive video wrapper for YouTube -->
     <div class="videoWrapper">
       <iframe id="videoFrame" src="" allowfullscreen></iframe>
     </div>
-
-    <!-- Error message area -->
     <div id="errorMsg"></div>
   </div>
 
@@ -359,24 +351,22 @@ gsap.from("#videoFrame", {
         errorMsg.innerHTML = '';
     });
 
- // Show welcome message on page load
 document.addEventListener('DOMContentLoaded', function() {
     const welcomeMessage = document.getElementById('welcomeMessage');
     const mainContent = document.querySelector('.container');
 
     // Show welcome message for 3 seconds
-    welcomeMessage.classList.add('show');
-
     setTimeout(function() {
-        // Hide the welcome message after 3 seconds
-        welcomeMessage.classList.remove('show');
-        welcomeMessage.classList.add('hidden'); // Hide it completely
+        // Fade out the welcome message
+        welcomeMessage.classList.add('fade-out');
 
-        // Show the main content
-        mainContent.classList.remove('hidden');
-    }, 3000); // 3 seconds = 3000 milliseconds
+        // After the fade-out transition, display the main content
+        setTimeout(function() {
+            welcomeMessage.classList.add('hidden'); // Hide the welcome message completely
+            mainContent.classList.remove('hidden'); // Show the main content
+        }, 1000); // 1 second to match the fade-out animation
+    }, 3000); // Display welcome message for 3 seconds before starting the transition
 });
-
     // Call this function to fetch all songs across multiple tables
     fetchAllSongs();
 
