@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feelings Ki Dukaan</title>
+
+  <!-- Import Poppins and Quicksand fonts from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif; /* Softer text font */
+      background: linear-gradient(135deg, #f1e7fe, #ffe1e1); /* Gradient background */
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      margin-bottom: 40px;
+    }
+    h1 {
+      margin-top: 20px;
+      color: #9f5afd; /* Lavender primary color */
+      font-family: 'Poppins', sans-serif; /* Bold, character-driven font */
+      font-size: 48px;
+      font-weight: 600;
+    }
+    .container {
+      margin: 50px auto; /* Spacing between heading and container */
+      padding: 30px;
+      max-width: 600px;
+      background-color: #fff;
+      border-radius: 20px; /* Softer rounded corners */
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+    }
+    /* Updated styles for the "How are you feeling today?" text */
+    label {
+      font-size: 24px; /* Larger font size for emotion text */
+      font-weight: 600;
+      color: #9f5afd; /* Lavender color */
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+
+    /* Chips container */
+    .chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    /* Style for each genre chip */
+    .chip {
+      background-color: #e0e0e0;
+      border-radius: 25px;
+      padding: 12px 24px; /* Slightly larger chips */
+      margin: 10px;
+      font-size: 16px;
+      font-family: 'Quicksand', sans-serif; /* Softer font for chips */
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Add scale effect */
+    }
+    .chip:hover {
+      background-color: #FF6F61; /* Coral hover color */
+      color: white;
+      transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+    .chip.selected {
+      background-color: #9f5afd; /* Selected chip background color */
+      color: white;
+    }
+    button {
+      font-size: 20px;
+      padding: 14px;
+      margin: 30px auto; /* Add more margin for space */
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      max-width: 250px; /* Center aligned button */
+      display: block; /* Ensures it's centrally aligned */
+      background-color: #9f5afd; /* Lavender background color */
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 12px rgba(159, 90, 253, 0.4); /* Button shadow */
+    }
+    button:hover {
+      background-color: #7e49d3; /* Darker lavender on hover */
+      box-shadow: 0 8px 16px rgba(159, 90, 253, 0.6); /* More prominent hover shadow */
+    }
+    .result {
+      margin-top: 40px; /* Increased space between button and result */
+      font-size: 20px;
+      color: #333;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .result a {
+      color: #007bff; /* Blue color for the song link */
+      text-decoration: none;
+    }
+    .result a:hover {
+      text-decoration: underline;
+    }
+    /* Responsive video wrapper */
+    .videoWrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      margin-top: 30px; /* Add space between song name and video */
+    }
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    #errorMsg {
+      color: red;
+      margin-top: 10px;
+
+
+/* Footer styling */
+footer {
+  background-color: #f1e7fe; /* Light lavender background */
+  padding: 20px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  border-top: 2px solid #9f5afd; /* Lavender border */
+  margin-top: 40px; /* Space before the footer */
+  margin-bottom: 20px;
+}
+
+footer a {
+  color: #9f5afd; /* Lavender color for the names */
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* Loader styles */
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 6px solid #9f5afd; /* Lavender primary color for loader */
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Hide loader once content is loaded */
+    .hidden {
+      display: none;
+
+// Animate the chips to slide in from the left
+gsap.from(".chip", {
+  duration: 0.8,
+  opacity: 0,
+  x: -100,
+  stagger: 0.1, // Stagger the animations for each chip
+});
+
+// Smooth fade-in for video content
+gsap.from("#videoFrame", {
+  duration: 1.2,
+  opacity: 0,
+  scale: 0.95,
+  ease: "power2.out"
+});
+
+
+
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Feelings Ki Dukaan</h1>
+
+  <div class="container">
+    <label for="genre">How are you feeling today?</label>
+
+    <!-- Chips container to hold the genre chips -->
+    <div class="chips-container" id="chipsContainer">
+      <!-- Chips (genre buttons) will be generated here dynamically -->
+    </div>
+
+    <button id="surpriseMe" style="display: none;">Surprise Me</button>
+
+    <div class="result" id="result"></div>
+    
+    <!-- Responsive video wrapper for YouTube -->
+    <div class="videoWrapper">
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    </div>
+
+    <!-- Error message area -->
+    <div id="errorMsg"></div>
+  </div>
+
+  <script>
+    let songs = [];
+    let selectedGenre = null;
+
+    // Fetch records from a single Airtable table
+    async function fetchSongsFromTable(tableName) {
+        const url = `https://api.airtable.com/v0/appWwK91Mdt6tB6XN/${tableName}?maxRecords=100&view=Grid%20view`;
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer patNqRYMw6EhMvx94.931a664f1e79b30730ac5a9f83b2ead4515d0b49681ff8c11c35a36ea84c63ab'
+                }
+            });
+
+            const data = await response.json();
+            if (data.records) {
+                parseAirtableData(data.records); // Add records from this table to the songs array
+            } else {
+                console.error(`No records found in table: ${tableName}`);
+            }
+        } catch (error) {
+            console.error(`Error fetching data from table: ${tableName}`, error);
+        }
+    }
+
+    // Parse Airtable data and add it to the songs array
+    function parseAirtableData(records) {
+        records.forEach(record => {
+            const song = {
+                name: record.fields['songs'],  // Adjust based on your Airtable field names
+                genre: record.fields['genre'],
+                videoID: record.fields['videoID'] // Adjust based on Airtable fields
+            };
+            songs.push(song);
+        });
+    }
+
+    // Fetch records from multiple tables
+    async function fetchAllSongs() {
+        const tables = ['NEW', 'NEW copy']; // Add the names of your tables here
+
+        for (let tableName of tables) {
+            await fetchSongsFromTable(tableName); // Fetch data from each table one by one
+        }
+
+        // Once all records are fetched, populate the genres
+        populateGenres();
+    }
+
+    // Populate the genres as chips (buttons)
+    function populateGenres() {
+        const genres = [...new Set(songs.map(song => song.genre))]; // Get unique genres
+        const chipsContainer = document.getElementById('chipsContainer');
+
+        genres.forEach(genre => {
+            const chip = document.createElement('div');
+            chip.classList.add('chip');
+            chip.textContent = genre;
+            chip.addEventListener('click', () => {
+                selectGenre(genre);
+            });
+            chipsContainer.appendChild(chip);
+        });
+    }
+
+    // Function to handle genre selection
+    function selectGenre(genre) {
+        selectedGenre = genre;
+
+        const allChips = document.querySelectorAll('.chip');
+        allChips.forEach(chip => {
+            chip.classList.remove('selected');
+        });
+
+        // Highlight selected chip
+        const selectedChip = Array.from(allChips).find(chip => chip.textContent === genre);
+        selectedChip.classList.add('selected');
+
+        // Show the Surprise Me button after selecting a genre
+        document.getElementById('surpriseMe').style.display = 'block';
+    }
+
+    // Get a random song from the selected genre
+    function getRandomSong() {
+        const filteredSongs = songs.filter(song => song.genre === selectedGenre);
+        const randomIndex = Math.floor(Math.random() * filteredSongs.length);
+        return filteredSongs[randomIndex];
+    }
+
+    // Event listener for the "Surprise Me" button
+    document.getElementById('surpriseMe').addEventListener('click', function() {
+        if (!selectedGenre) return;
+        const song = getRandomSong();
+
+        const videoID = song.videoID;
+        const videoFrame = document.getElementById('videoFrame');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Embed the YouTube video
+    videoFrame.src = `https://www.youtube.com/embed/${videoID}?autoplay=1`;
+
+        // Add hyperlink to the song title
+        document.getElementById('result').innerHTML = `Now playing: <a href="https://www.youtube.com/watch?v=${videoID}" target="_blank">${song.name}</a>`;
+
+        // If the video cannot be embedded, show error message with a link to YouTube
+        videoFrame.onerror = function() {
+            errorMsg.innerHTML = 'Sorry, this video cannot be embedded. <a href="https://www.youtube.com/watch?v=' + videoID + '" target="_blank">Click here to watch it on YouTube</a>.';
+        };
+
+        // Reset the error message if the video works
+        errorMsg.innerHTML = '';
+    });
+
+    // Call this function to fetch all songs across multiple tables
+    fetchAllSongs();
+
+  </script>
+
+<!-- Add this code just before the closing </body> tag in your HTML -->
+<footer>
+  Original concept by Shibzi💃 <br>
+  Made with ❤️ for Shibzi by Mitsu
+</footer>
+
+
+</body>
+</html>
