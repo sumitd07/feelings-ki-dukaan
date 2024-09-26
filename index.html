@@ -185,14 +185,44 @@ gsap.from("#videoFrame", {
   ease: "power2.out"
 });
 
-
-
     }
+
+/* Welcome Screen Styles */
+.welcome-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Initially hidden */
+  transition: opacity 1s ease, visibility 0s linear 1s; /* Fade out after delay */
+}
+
+.welcome-screen.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s ease; /* Fade in */
+}
+
+.hidden {
+  display: none;
+}
   </style>
 </head>
 <body>
 
   <h1>Feelings Ki Dukaan</h1>
+
+  <!-- Welcome Screen -->
+  <div id="welcomeMessage" class="welcome-screen">
+    <h2>Welcome to Feelings Ki Dukaan!</h2>
+    <p>Your personal mood-based music curator. Let’s find the perfect song to match your vibe.</p>
+  </div>
 
   <div class="container">
     <label for="genre">How are you feeling today?</label>
@@ -328,6 +358,25 @@ gsap.from("#videoFrame", {
         // Reset the error message if the video works
         errorMsg.innerHTML = '';
     });
+
+ // Show welcome message on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      const welcomeMessage = document.getElementById('welcomeMessage');
+      const mainContent = document.querySelector('.container');
+
+      // Show welcome message for 3 seconds
+      welcomeMessage.classList.add('show');
+
+      setTimeout(function() {
+          // Hide the welcome message after 3 seconds
+          welcomeMessage.classList.remove('show');
+          welcomeMessage.classList.add('hidden'); // Hide it completely
+
+          // Show the main content
+          mainContent.classList.remove('hidden');
+      }, 3000); // 3 seconds = 3000 milliseconds
+  });
+
 
     // Call this function to fetch all songs across multiple tables
     fetchAllSongs();
