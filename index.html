@@ -13,7 +13,6 @@
 
   <style>
 
-
 /* General Page Styles */
 body {
   font-family: 'Quicksand', sans-serif;
@@ -22,8 +21,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  height: 100vh; /* Ensures the gradient covers the full viewport height */
-  overflow: hidden; /* Prevents scrolling during welcome screen */
+  height: 100vh;
 }
 
 h1 {
@@ -35,20 +33,30 @@ h1 {
 }
 
 .container {
-  margin: 50px auto;
-  padding: 30px;
+  margin: 30px auto; /* Reduced margin */
+  padding: 20px;
   max-width: 600px;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
+/* First section: Genre selection */
+.genre-selection {
+  max-height: 300px; /* Limit the height of the chips container */
+  overflow-y: auto;  /* Make the container scrollable if the content exceeds */
+  padding: 20px;
+  margin-bottom: 20px; /* Reduced margin */
+  border-radius: 10px;
+}
+
+/* Adjust spacing for the chips and button */
 label {
   font-size: 24px;
   font-weight: 600;
   color: #9f5afd;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: block;
 }
 
@@ -56,14 +64,14 @@ label {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 20px 0;
+  margin: 10px 0; /* Less margin to avoid extra spacing */
 }
 
 .chip {
   background-color: #e0e0e0;
   border-radius: 25px;
-  padding: 12px 24px;
-  margin: 10px;
+  padding: 10px 20px;
+  margin: 8px;
   font-size: 16px;
   font-family: 'Quicksand', sans-serif;
   color: #333;
@@ -72,7 +80,7 @@ label {
 }
 
 .chip:hover {
-  background-color: #ff6f61;
+  background-color: #ff6f61; /* Coral hover color */
   color: white;
   transform: scale(1.1);
 }
@@ -82,10 +90,15 @@ label {
   color: white;
 }
 
+/* Place the Surprise Me button outside the scrollable chips container */
+.surprise-me-container {
+  margin-top: 20px; /* Space between the chips and the button */
+}
+
 button {
   font-size: 20px;
   padding: 14px;
-  margin: 30px auto;
+  margin: 0 auto; /* Center align the button */
   border-radius: 10px;
   border: none;
   width: 100%;
@@ -103,11 +116,16 @@ button:hover {
   box-shadow: 0 8px 16px rgba(159, 90, 253, 0.6);
 }
 
+/* Second section: Video and results */
+.video-section {
+  margin-top: 50px;
+}
+
 .result {
-  margin-top: 40px;
   font-size: 20px;
   color: #333;
   font-family: 'Quicksand', sans-serif;
+  margin-bottom: 20px;
 }
 
 .result a {
@@ -147,7 +165,7 @@ iframe {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff; /* White background for welcome screen */
+  background-color: #fff;
   padding: 40px;
   border-radius: 20px;
   text-align: center;
@@ -229,14 +247,32 @@ iframe {
 
   <!-- Main Content - Initially Hidden -->
   <div class="container hidden">
+    
+ 
+
+<div class="genre-selection">
     <label for="genre">How are you feeling today?</label>
     <div class="chips-container" id="chipsContainer"></div>
+  </div>
+
+  <!-- New container for the Surprise Me button -->
+  <div class="surprise-me-container">
     <button id="surpriseMe" style="display: none;">Surprise Me</button>
+  </div>
+
+  <!-- Second section: Video and results -->
+  <div class="video-section">
     <div class="result" id="result"></div>
     <div class="videoWrapper">
       <iframe id="videoFrame" src="" allowfullscreen></iframe>
     </div>
     <div id="errorMsg"></div>
+  </div>
+
+  </div>
+
+
+
   </div>
 
   <script>
