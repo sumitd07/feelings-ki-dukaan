@@ -116,6 +116,22 @@ button:hover {
   box-shadow: 0 8px 16px rgba(159, 90, 253, 0.6);
 }
 
+/* Footer Styles */
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #f1e7fe; /* Match the gradient background color */
+  color: #9f5afd; /* Lavender for text */
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
 /* Second section: Video and results */
 .video-section {
   margin-top: 50px;
@@ -408,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('hidden');
             footer.classList.remove('hidden');
         }, 1000); // 1 second for fade-out transition
-    }, 5000); // Display welcome message for 5 seconds
+    }, 3000); // Display welcome message for 5 seconds
 });
     // Call this function to fetch all songs across multiple tables
     fetchAllSongs();
