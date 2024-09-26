@@ -21,7 +21,8 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  height: 100vh;
+  min-height: 100vh; /* Ensure full viewport height on larger screens */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 h1 {
@@ -32,8 +33,9 @@ h1 {
   font-weight: 600;
 }
 
+/* Main Container */
 .container {
-  margin: 30px auto; /* Reduced margin */
+  margin: 30px auto; /* Adjust margin for better spacing */
   padding: 20px;
   max-width: 600px;
   background-color: #fff;
@@ -41,32 +43,34 @@ h1 {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* First section: Genre selection */
+/* Genre Selection Section */
 .genre-selection {
-  max-height: 500px; /* Limit the height of the chips container */
-  overflow-y: auto;  /* Make the container scrollable if the content exceeds */
   padding: 20px;
-  margin-bottom: 20px; /* Reduced margin */
+  margin-bottom: 20px;
   border-radius: 10px;
 }
 
-/* Adjust spacing for the chips and button */
+/* Fix for "How are you feeling today?" */
 label {
-  font-size: 24px;
-  font-weight: 600;
-  color: #9f5afd;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 10px;
+  font-size: 24px; /* Restore larger font size */
+  font-weight: 600; /* Bold text */
+  color: #9f5afd; /* Lavender color */
+  font-family: 'Poppins', sans-serif; /* Correct font */
+  margin-bottom: 20px;
   display: block;
+  text-align: center;
 }
 
+/* Chips Container - No Scroll on Mobile */
 .chips-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  /* Ensure chips wrap neatly */
   justify-content: center;
-  margin: 10px 0; /* Less margin to avoid extra spacing */
+  margin: 10px 0;
+  max-height: none; /* Remove any internal scroll */
 }
 
+/* Genre Chips */
 .chip {
   background-color: #e0e0e0;
   border-radius: 25px;
@@ -82,7 +86,7 @@ label {
 .chip:hover {
   background-color: #ff6f61; /* Coral hover color */
   color: white;
-  transform: scale(1.1);
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
 .chip.selected {
@@ -90,15 +94,15 @@ label {
   color: white;
 }
 
-/* Place the Surprise Me button outside the scrollable chips container */
+/* Surprise Me Button */
 .surprise-me-container {
-  margin-top: 20px; /* Space between the chips and the button */
+  margin-top: 20px; /* Add space between the chips and button */
 }
 
 button {
   font-size: 20px;
   padding: 14px;
-  margin: 0 auto; /* Center align the button */
+  margin: 0 auto;
   border-radius: 10px;
   border: none;
   width: 100%;
@@ -120,7 +124,6 @@ button:hover {
 footer {
   margin-top: 50px;
   padding: 20px;
-  background-color: #f1e7fe; /* Match the gradient background color */
   color: #9f5afd; /* Lavender for text */
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
@@ -132,7 +135,7 @@ footer p {
 }
 
 
-/* Second section: Video and results */
+/* Video and Result Section */
 .video-section {
   margin-top: 50px;
 }
@@ -155,7 +158,7 @@ footer p {
 
 .videoWrapper {
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
   margin-top: 30px;
@@ -222,27 +225,33 @@ iframe {
   h1 {
     font-size: 36px;
   }
+
   .container {
     padding: 20px;
     margin: 20px auto;
   }
+
   .chip {
     padding: 10px 20px;
     font-size: 14px;
   }
+
   button {
     font-size: 16px;
     padding: 12px;
     margin: 20px auto;
     max-width: 200px;
   }
+
   .welcome-screen {
     width: 90%;
     padding: 20px;
   }
+
   .welcome-screen h2 {
     font-size: 28px;
   }
+
   .welcome-screen p {
     font-size: 16px;
   }
