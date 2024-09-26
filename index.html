@@ -224,7 +224,7 @@ gsap.from("#videoFrame", {
     <p>Your personal mood-based music curator. Let’s find the perfect song to match your vibe.</p>
   </div>
 
-  <div class="container">
+  <div class="container hidden">
     <label for="genre">How are you feeling today?</label>
 
     <!-- Chips container to hold the genre chips -->
@@ -360,23 +360,22 @@ gsap.from("#videoFrame", {
     });
 
  // Show welcome message on page load
-  document.addEventListener('DOMContentLoaded', function() {
-      const welcomeMessage = document.getElementById('welcomeMessage');
-      const mainContent = document.querySelector('.container');
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    const mainContent = document.querySelector('.container');
 
-      // Show welcome message for 3 seconds
-      welcomeMessage.classList.add('show');
+    // Show welcome message for 3 seconds
+    welcomeMessage.classList.add('show');
 
-      setTimeout(function() {
-          // Hide the welcome message after 3 seconds
-          welcomeMessage.classList.remove('show');
-          welcomeMessage.classList.add('hidden'); // Hide it completely
+    setTimeout(function() {
+        // Hide the welcome message after 3 seconds
+        welcomeMessage.classList.remove('show');
+        welcomeMessage.classList.add('hidden'); // Hide it completely
 
-          // Show the main content
-          mainContent.classList.remove('hidden');
-      }, 3000); // 3 seconds = 3000 milliseconds
-  });
-
+        // Show the main content
+        mainContent.classList.remove('hidden');
+    }, 3000); // 3 seconds = 3000 milliseconds
+});
 
     // Call this function to fetch all songs across multiple tables
     fetchAllSongs();
